@@ -368,10 +368,492 @@ mirror and a razor lay crossed.”</p>
 library(stringr)
 
 # Create the string
-ulysses_line &lt;- &quot;Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.&quot;
+my_line &lt;- &quot;Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.&quot;
 
-ulysses_line</code></pre>
-<pre><code>## [1] &quot;Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.&quot;</code></pre>
+# Split word
+split_word &lt;- str_split(my_line, &quot;\\s+&quot;,  simplify = TRUE)
+
+# extract every third element
+every_third_word &lt;- split_word[seq(3, length(split_word), by = 3)]
+
+
+every_third_word</code></pre>
+<pre><code>## [1] &quot;Buck&quot;    &quot;from&quot;    &quot;bearing&quot; &quot;of&quot;      &quot;which&quot;   &quot;and&quot;     &quot;lay&quot;</code></pre>
+</div>
+<div id="challenge-2" class="section level3">
+<h3>CHALLENGE 2</h3>
+<pre class="r"><code># store the matrix
+m &lt;- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
+
+#Given the matrix, m, above, extract the 2nd, 3rd, and 6th columns and assign them to the variable x
+x &lt;- m[, c(2, 3, 6)]
+
+# Given the matrix, m, above, extract the 6th to 8th row and assign them to the variable x
+x &lt;- m[6:8, ]
+
+# Given the matrix, m, above, extract the elements from row 2, column 2 to row 6, column 9 and assign them to the variable x
+x &lt;- m[2:6, 2:9]</code></pre>
+</div>
+<div id="challenge-3" class="section level3">
+<h3>CHALLENGE 3</h3>
+<p>Construct a 4-dimensional, 400 element array (5 x 5 x 4 x 4) named a
+consisting of the numbers 400 to 1 (i.e., a descending series)</p>
+<pre class="r"><code>a &lt;- array(400:1, dim = c(5, 5, 4, 4))
+
+a[1, 1, 1, 2]</code></pre>
+<pre><code>## [1] 300</code></pre>
+<pre class="r"><code>a[2, 3, 2, ]</code></pre>
+<pre><code>## [1] 364 264 164  64</code></pre>
+<pre class="r"><code>a[1:5, 1:5, 3, 3]</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]  150  145  140  135  130
+## [2,]  149  144  139  134  129
+## [3,]  148  143  138  133  128
+## [4,]  147  142  137  132  127
+## [5,]  146  141  136  131  126</code></pre>
+</div>
+<div id="overwriting" class="section level3">
+<h3>Overwriting</h3>
+<pre class="r"><code>m[7, 1] &lt;- 564
+m[, 8] &lt;- 2
+m[2:5, 4:8] &lt;- 1
+m[2:5, 4:8] &lt;- c(20, 19, 18, 17)
+m[2:5, 4:8] &lt;- matrix(data = c(20:1), nrow = 4, ncol = 5, byrow = TRUE)
+m[, 8] &lt;- c(&quot;a&quot;, &quot;b&quot;)</code></pre>
+</div>
+<div id="lists-and-data-frames" class="section level3">
+<h3>Lists and Data Frames</h3>
+<pre class="r"><code>s &lt;- c(&quot;this&quot;, &quot;is&quot;, &quot;a&quot;, &quot;vector&quot;, &quot;of&quot;, &quot;strings&quot;)  # here we have a vector
+m &lt;- matrix(data = 1:40, nrow = 5, ncol = 8)  # this is a matrix
+b &lt;- FALSE  #and this is a logical statement
+l &lt;- list(s, m, b)  # this puts them all together as a list
+l</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;this&quot;    &quot;is&quot;      &quot;a&quot;       &quot;vector&quot;  &quot;of&quot;      &quot;strings&quot;
+## 
+## [[2]]
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]    1    6   11   16   21   26   31   36
+## [2,]    2    7   12   17   22   27   32   37
+## [3,]    3    8   13   18   23   28   33   38
+## [4,]    4    9   14   19   24   29   34   39
+## [5,]    5   10   15   20   25   30   35   40
+## 
+## [[3]]
+## [1] FALSE</code></pre>
+<pre class="r"><code>l[[2]]  #let&#39;s take another look at our matrix</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]    1    6   11   16   21   26   31   36
+## [2,]    2    7   12   17   22   27   32   37
+## [3,]    3    8   13   18   23   28   33   38
+## [4,]    4    9   14   19   24   29   34   39
+## [5,]    5   10   15   20   25   30   35   40</code></pre>
+<pre class="r"><code>l[[2]][2, 6]  #this will show us the entry at row 2, column 6 of the matrix in the second position of the list</code></pre>
+<pre><code>## [1] 27</code></pre>
+<pre class="r"><code>l[1:2]  # here we&#39;re slicing our list so it just has the first and second elements</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;this&quot;    &quot;is&quot;      &quot;a&quot;       &quot;vector&quot;  &quot;of&quot;      &quot;strings&quot;
+## 
+## [[2]]
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]    1    6   11   16   21   26   31   36
+## [2,]    2    7   12   17   22   27   32   37
+## [3,]    3    8   13   18   23   28   33   38
+## [4,]    4    9   14   19   24   29   34   39
+## [5,]    5   10   15   20   25   30   35   40</code></pre>
+<pre class="r"><code>l[c(1, 3)]  # and here we&#39;re only taking the first and third elements</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;this&quot;    &quot;is&quot;      &quot;a&quot;       &quot;vector&quot;  &quot;of&quot;      &quot;strings&quot;
+## 
+## [[2]]
+## [1] FALSE</code></pre>
+<pre class="r"><code>str(l)</code></pre>
+<pre><code>## List of 3
+##  $ : chr [1:6] &quot;this&quot; &quot;is&quot; &quot;a&quot; &quot;vector&quot; ...
+##  $ : int [1:5, 1:8] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ : logi FALSE</code></pre>
+<pre class="r"><code>names(l) &lt;- c(&quot;string&quot;, &quot;matrix&quot;, &quot;logical&quot;)
+names(l)</code></pre>
+<pre><code>## [1] &quot;string&quot;  &quot;matrix&quot;  &quot;logical&quot;</code></pre>
+<pre class="r"><code>l$string  # this is calling the element named &#39;string&#39; in list &#39;l&#39;</code></pre>
+<pre><code>## [1] &quot;this&quot;    &quot;is&quot;      &quot;a&quot;       &quot;vector&quot;  &quot;of&quot;      &quot;strings&quot;</code></pre>
+<pre class="r"><code>l$matrix[3, 5]  # this is calling the entry in row 3, column 5 of the element named &#39;matrix&#39; in list &#39;l&#39;</code></pre>
+<pre><code>## [1] 23</code></pre>
+</div>
+<div id="challenge-4" class="section level3">
+<h3>CHALLENGE 4</h3>
+<pre class="r"><code># store the lowest family in vectors
+Platyrrhini &lt;- c(&quot;Cebidae&quot;, &quot;Atelidae&quot;, &quot;Pitheciidae&quot;)
+Catarrhini  &lt;- c(&quot;Cercopithecidae&quot;, &quot;Hylobatidae&quot;, &quot;Hominidae&quot;)
+Tarsioidea  &lt;- c(&quot;Tarsiidae&quot;)
+Lorisoidea  &lt;- c(&quot;Lorisidae&quot;, &quot;Galagidae&quot;)
+Lemuroidea  &lt;- c(&quot;Cheirogaleidae&quot;, &quot;Lepilemuridae&quot;, &quot;Indriidae&quot;, &quot;Lemuridae&quot;, &quot;Daubentoniidae&quot;)
+
+#group family into new vector that represent the higher family 
+Anthropoidea &lt;- list(Platyrrhini, Catarrhini)
+names(Anthropoidea) &lt;- c(&quot;Platyrrhini&quot;, &quot;Catarrhini&quot;)
+
+Haplorhini &lt;- list(Anthropoidea, Tarsioidea)
+names(Haplorhini) &lt;- c(&quot;Anthropoidea&quot;, &quot;Tarsioidea&quot;)
+
+Strepsirhini &lt;- list(Lorisoidea, Lemuroidea)
+names(Strepsirhini) &lt;- c(&quot;Lemuroidea&quot;, &quot;Lorisoidea&quot;)
+
+# combine all into &quot;primates&quot;
+Primates &lt;- list(Haplorhini, Strepsirhini)
+names(Primates) &lt;- c(&quot;Haplorhini&quot;, &quot;Strepsirhini&quot;)
+
+Primates</code></pre>
+<pre><code>## $Haplorhini
+## $Haplorhini$Anthropoidea
+## $Haplorhini$Anthropoidea$Platyrrhini
+## [1] &quot;Cebidae&quot;     &quot;Atelidae&quot;    &quot;Pitheciidae&quot;
+## 
+## $Haplorhini$Anthropoidea$Catarrhini
+## [1] &quot;Cercopithecidae&quot; &quot;Hylobatidae&quot;     &quot;Hominidae&quot;      
+## 
+## 
+## $Haplorhini$Tarsioidea
+## [1] &quot;Tarsiidae&quot;
+## 
+## 
+## $Strepsirhini
+## $Strepsirhini$Lemuroidea
+## [1] &quot;Lorisidae&quot; &quot;Galagidae&quot;
+## 
+## $Strepsirhini$Lorisoidea
+## [1] &quot;Cheirogaleidae&quot; &quot;Lepilemuridae&quot;  &quot;Indriidae&quot;      &quot;Lemuridae&quot;     
+## [5] &quot;Daubentoniidae&quot;</code></pre>
+</div>
+<div id="random-people-data-frame" class="section level3">
+<h3>Random People Data Frame</h3>
+<pre class="r"><code># get directory for random_people.csv
+getwd()</code></pre>
+<pre><code>## [1] &quot;/Users/yongcen/Documents/GitHub/AN588-Homework1-briancen&quot;</code></pre>
+<pre class="r"><code>#read scv
+df &lt;- read.csv(&quot;~/Documents/GitHub/AN588-Homework1-briancen/random-people.csv&quot;, sep = &quot;,&quot;, header = TRUE, stringsAsFactors = FALSE)
+
+# only print select columns
+df[, c(1, 3, 4, 11, 12)]</code></pre>
+<pre><code>##    gender name.first  name.last login.password            dob
+## 1    male        ted     wright          rolex   11/8/73 1:33
+## 2    male    quentin    schmitt         norton   5/24/51 3:16
+## 3  female      laura   johansen        stevens  5/22/77 21:03
+## 4    male     ismael    herrero         303030    8/1/58 9:13
+## 5  female     susana     blanco          aloha  12/18/55 3:21
+## 6    male      mason     wilson         topdog   6/23/60 9:19
+## 7    male       lutz    strauio       close-up   7/20/80 3:51
+## 8  female     kaylee     gordon       atlantis  3/24/48 12:22
+## 9    male     baraek limoncuocu         tobias   5/8/92 22:01
+## 10   male     basile     perrin          ellie   2/28/65 0:37
+## 11   male      ruben      lopez           beth   5/27/76 3:30
+## 12   male   valtteri   waisanen       nocturne 12/24/80 10:40
+## 13 female    vanessa     brewer       gladiato  1/15/68 17:39
+## 14 female   kimberly      brown       nebraska    1/9/86 8:54
+## 15 female     loreen   baettner         rovers    9/3/49 4:56
+## 16 female      becky    wallace          bambi   3/30/59 5:03
+## 17   male     hector   gonzalez        calgary  12/10/53 6:48
+## 18 female       ella       neva       f00tball  7/18/91 14:30
+## 19   male      simon    barnaby         buddie   6/18/89 5:06
+## 20   male        max      moser    penetrating  8/12/61 12:13</code></pre>
+<pre class="r"><code># check elements
+str(df)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    20 obs. of  17 variables:
+##  $ gender           : chr  &quot;male&quot; &quot;male&quot; &quot;female&quot; &quot;male&quot; ...
+##  $ name.title       : chr  &quot;mr&quot; &quot;mr&quot; &quot;ms&quot; &quot;mr&quot; ...
+##  $ name.first       : chr  &quot;ted&quot; &quot;quentin&quot; &quot;laura&quot; &quot;ismael&quot; ...
+##  $ name.last        : chr  &quot;wright&quot; &quot;schmitt&quot; &quot;johansen&quot; &quot;herrero&quot; ...
+##  $ location.street  : chr  &quot;2020 royal ln&quot; &quot;2433 rue dubois&quot; &quot;2142 elmelunden&quot; &quot;3897 calle del barquillo&quot; ...
+##  $ location.city    : chr  &quot;coffs harbour&quot; &quot;vitry-sur-seine&quot; &quot;silkeboeg&quot; &quot;gandia&quot; ...
+##  $ location.state   : chr  &quot;tasmania&quot; &quot;indre-et-loire&quot; &quot;hovedstaden&quot; &quot;ceuta&quot; ...
+##  $ location.postcode: chr  &quot;4126&quot; &quot;99856&quot; &quot;16264&quot; &quot;61349&quot; ...
+##  $ email            : chr  &quot;ted.wright@example.com&quot; &quot;quentin.schmitt@example.com&quot; &quot;laura.johansen@example.com&quot; &quot;ismael.herrero@example.com&quot; ...
+##  $ login.username   : chr  &quot;organicleopard402&quot; &quot;bluegoose191&quot; &quot;orangebird528&quot; &quot;heavyswan518&quot; ...
+##  $ login.password   : chr  &quot;rolex&quot; &quot;norton&quot; &quot;stevens&quot; &quot;303030&quot; ...
+##  $ dob              : chr  &quot;11/8/73 1:33&quot; &quot;5/24/51 3:16&quot; &quot;5/22/77 21:03&quot; &quot;8/1/58 9:13&quot; ...
+##  $ date.registered  : chr  &quot;5/5/07 20:26&quot; &quot;4/11/11 7:05&quot; &quot;5/16/14 15:53&quot; &quot;2/17/06 16:53&quot; ...
+##  $ phone            : chr  &quot;01-0349-5128&quot; &quot;05-72-65-32-21&quot; &quot;81616775&quot; &quot;974-117-403&quot; ...
+##  $ cell             : chr  &quot;0449-989-455&quot; &quot;06-83-24-92-41&quot; &quot;697-993-20&quot; &quot;665-791-673&quot; ...
+##  $ picture.large    : chr  &quot;https://randomuser.me/api/portraits/men/48.jpg&quot; &quot;https://randomuser.me/api/portraits/men/53.jpg&quot; &quot;https://randomuser.me/api/portraits/women/70.jpg&quot; &quot;https://randomuser.me/api/portraits/men/79.jpg&quot; ...
+##  $ nat              : chr  &quot;AU&quot; &quot;FR&quot; &quot;DK&quot; &quot;ES&quot; ...</code></pre>
+<pre class="r"><code># returns a vector of data in column 3
+df[, 3]</code></pre>
+<pre><code>##  [1] &quot;ted&quot;      &quot;quentin&quot;  &quot;laura&quot;    &quot;ismael&quot;   &quot;susana&quot;   &quot;mason&quot;   
+##  [7] &quot;lutz&quot;     &quot;kaylee&quot;   &quot;baraek&quot;   &quot;basile&quot;   &quot;ruben&quot;    &quot;valtteri&quot;
+## [13] &quot;vanessa&quot;  &quot;kimberly&quot; &quot;loreen&quot;   &quot;becky&quot;    &quot;hector&quot;   &quot;ella&quot;    
+## [19] &quot;simon&quot;    &quot;max&quot;</code></pre>
+<pre class="r"><code># returns a vector of data for column *name.last*
+str(df$name.last)</code></pre>
+<pre><code>##  chr [1:20] &quot;wright&quot; &quot;schmitt&quot; &quot;johansen&quot; &quot;herrero&quot; &quot;blanco&quot; &quot;wilson&quot; ...</code></pre>
+<pre class="r"><code># returns a data frame of data from column 3
+df[3]</code></pre>
+<pre><code>##    name.first
+## 1         ted
+## 2     quentin
+## 3       laura
+## 4      ismael
+## 5      susana
+## 6       mason
+## 7        lutz
+## 8      kaylee
+## 9      baraek
+## 10     basile
+## 11      ruben
+## 12   valtteri
+## 13    vanessa
+## 14   kimberly
+## 15     loreen
+## 16      becky
+## 17     hector
+## 18       ella
+## 19      simon
+## 20        max</code></pre>
+<pre class="r"><code># returns a data frame of data for column *name.last*
+df[&quot;name.last&quot;]</code></pre>
+<pre><code>##     name.last
+## 1      wright
+## 2     schmitt
+## 3    johansen
+## 4     herrero
+## 5      blanco
+## 6      wilson
+## 7     strauio
+## 8      gordon
+## 9  limoncuocu
+## 10     perrin
+## 11      lopez
+## 12   waisanen
+## 13     brewer
+## 14      brown
+## 15   baettner
+## 16    wallace
+## 17   gonzalez
+## 18       neva
+## 19    barnaby
+## 20      moser</code></pre>
+<pre class="r"><code># You can add rows (additional cases) or columns (additional variables) to a data frame using rbind() and cbind().
+df &lt;- cbind(df, id = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+    17, 18, 19, 20))
+df &lt;- cbind(df, school = c(&quot;BU&quot;, &quot;BU&quot;, &quot;Harvard&quot;, &quot;Harvard&quot;, &quot;BU&quot;, &quot;Boston College&quot;,
+    &quot;MIT&quot;, &quot;BU&quot;, &quot;BU&quot;, &quot;UMASS Boston&quot;, &quot;Harvard&quot;, &quot;BU&quot;, &quot;Boston College&quot;, &quot;BU&quot;,
+    &quot;Harvard&quot;, &quot;MIT&quot;, &quot;Harvard&quot;, &quot;BU&quot;, &quot;UMASS Boston&quot;, &quot;Harvard&quot;))
+df</code></pre>
+<pre><code>##    gender name.title name.first  name.last            location.street
+## 1    male         mr        ted     wright              2020 royal ln
+## 2    male         mr    quentin    schmitt            2433 rue dubois
+## 3  female         ms      laura   johansen            2142 elmelunden
+## 4    male         mr     ismael    herrero   3897 calle del barquillo
+## 5  female         ms     susana     blanco    2208 avenida de america
+## 6    male         mr      mason     wilson           4576 wilson road
+## 7    male         mr       lutz    strauio             5707 eichenweg
+## 8  female       miss     kaylee     gordon            5475 camden ave
+## 9    male         mr     baraek limoncuocu             2664 baedat cd
+## 10   male         mr     basile     perrin   3683 avenue jean-jaurias
+## 11   male   monsieur      ruben      lopez        4204 rue principale
+## 12   male         mr   valtteri   waisanen             9850 hemeentie
+## 13 female        mrs    vanessa     brewer          3436 henry street
+## 14 female       miss   kimberly      brown            8654 manor road
+## 15 female       miss     loreen   baettner              2234 erlenweg
+## 16 female       miss      becky    wallace          5965 the crescent
+## 17   male   monsieur     hector   gonzalez           5104 rue pasteur
+## 18 female         ms       ella       neva             4620 visiokatu
+## 19   male         mr      simon    barnaby             2206 simcoe st
+## 20   male         mr        max      moser 3045 koenigsberger strasse
+##      location.city         location.state location.postcode
+## 1    coffs harbour               tasmania              4126
+## 2  vitry-sur-seine         indre-et-loire             99856
+## 3        silkeboeg            hovedstaden             16264
+## 4           gandia                  ceuta             61349
+## 5         mastoles            extremadura             29445
+## 6          dunedin               taranaki             91479
+## 7            emden            brandenburg             13341
+## 8            flint                 oregon             84509
+## 9            siirt                  tokat             86146
+## 10      versailles               dordogne             25177
+## 11      montricher                 aargau              7993
+## 12          halsua          south karelia             58124
+## 13       celbridge                 fingal             30030
+## 14          bangor                borders          HI92 8RY
+## 15 chemnitzer land          niedersachsen             27167
+## 16             ely         west yorkshire           GR8 0UP
+## 17         bercher             st. gallen              1745
+## 18          kerava         finland proper             26385
+## 19          odessa            nova scotia             90889
+## 20          weimar mecklenburg-vorpommern             18553
+##                              email    login.username login.password
+## 1           ted.wright@example.com organicleopard402          rolex
+## 2      quentin.schmitt@example.com      bluegoose191         norton
+## 3       laura.johansen@example.com     orangebird528        stevens
+## 4       ismael.herrero@example.com      heavyswan518         303030
+## 5        susana.blanco@example.com    silverkoala701          aloha
+## 6         mason.wilson@example.com    organicduck470         topdog
+## 7         lutz.strauio@example.com    purplemouse467       close-up
+## 8        kaylee.gordon@example.com beautifulgoose794       atlantis
+## 9  baraek.limoncuoculu@example.com whitebutterfly599         tobias
+## 10       basile.perrin@example.com organicmeercat418          ellie
+## 11         ruben.lopez@example.com      crazybear348           beth
+## 12   valtteri.waisanen@example.com        redswan919       nocturne
+## 13      vanessa.brewer@example.com  purpleleopard113       gladiato
+## 14      kimberly.brown@example.com  crazyelephant996       nebraska
+## 15     loreen.baettner@example.com     blacktiger499         rovers
+## 16       becky.wallace@example.com   crazypeacock937          bambi
+## 17     hector.gonzalez@example.com     organiccat637        calgary
+## 18           ella.neva@example.com  orangegorilla786       f00tball
+## 19       simon.barnaby@example.com     redmeercat724         buddie
+## 20           max.moser@example.com     bigladybug459    penetrating
+##               dob date.registered          phone           cell
+## 1    11/8/73 1:33    5/5/07 20:26   01-0349-5128   0449-989-455
+## 2    5/24/51 3:16    4/11/11 7:05 05-72-65-32-21 06-83-24-92-41
+## 3   5/22/77 21:03   5/16/14 15:53       81616775     697-993-20
+## 4     8/1/58 9:13   2/17/06 16:53    974-117-403    665-791-673
+## 5   12/18/55 3:21   10/3/02 17:55    917-199-202    612-612-929
+## 6    6/23/60 9:19    12/1/08 8:31 (137)-326-5772 (700)-060-1523
+## 7    7/20/80 3:51   4/10/11 20:44   0802-1871274   0170-4221269
+## 8   3/24/48 12:22     5/5/13 8:14 (817)-962-1275 (831)-325-1142
+## 9    5/8/92 22:01    9/12/04 0:56 (023)-879-4331 (837)-014-1113
+## 10   2/28/65 0:37    4/12/07 4:50 04-16-53-97-17 06-63-08-15-52
+## 11   5/27/76 3:30   4/17/06 17:40 (931)-692-1073 (747)-833-3781
+## 12 12/24/80 10:40   9/22/03 20:47     02-227-661  042-153-83-79
+## 13  1/15/68 17:39    2/5/05 21:02   041-167-2755   081-154-0245
+## 14    1/9/86 8:54    12/3/11 0:41   017684 80873   0799-553-944
+## 15    9/3/49 4:56   3/24/16 17:27   0693-0473309   0176-2769900
+## 16   3/30/59 5:03    7/15/08 2:42   015395 04615   0740-849-325
+## 17  12/10/53 6:48   3/19/04 20:51 (569)-609-0669 (032)-958-9790
+## 18  7/18/91 14:30    3/17/14 7:13     02-351-279  043-436-42-30
+## 19   6/18/89 5:06  12/24/12 12:08   618-983-5566   088-025-2948
+## 20  8/12/61 12:13    7/19/03 1:08   0503-3338884   0175-7158431
+##                                       picture.large nat id         school
+## 1    https://randomuser.me/api/portraits/men/48.jpg  AU  1             BU
+## 2    https://randomuser.me/api/portraits/men/53.jpg  FR  2             BU
+## 3  https://randomuser.me/api/portraits/women/70.jpg  DK  3        Harvard
+## 4    https://randomuser.me/api/portraits/men/79.jpg  ES  4        Harvard
+## 5  https://randomuser.me/api/portraits/women/18.jpg  ES  5             BU
+## 6    https://randomuser.me/api/portraits/men/60.jpg  NZ  6 Boston College
+## 7    https://randomuser.me/api/portraits/men/31.jpg  DE  7            MIT
+## 8  https://randomuser.me/api/portraits/women/65.jpg  US  8             BU
+## 9    https://randomuser.me/api/portraits/men/94.jpg  TR  9             BU
+## 10   https://randomuser.me/api/portraits/men/82.jpg  FR 10   UMASS Boston
+## 11   https://randomuser.me/api/portraits/men/84.jpg  CH 11        Harvard
+## 12   https://randomuser.me/api/portraits/men/80.jpg  FI 12             BU
+## 13 https://randomuser.me/api/portraits/women/15.jpg  IE 13 Boston College
+## 14 https://randomuser.me/api/portraits/women/49.jpg  GB 14             BU
+## 15 https://randomuser.me/api/portraits/women/50.jpg  DE 15        Harvard
+## 16 https://randomuser.me/api/portraits/women/67.jpg  GB 16            MIT
+## 17    https://randomuser.me/api/portraits/men/9.jpg  CH 17        Harvard
+## 18 https://randomuser.me/api/portraits/women/68.jpg  FI 18             BU
+## 19   https://randomuser.me/api/portraits/men/61.jpg  CA 19   UMASS Boston
+## 20   https://randomuser.me/api/portraits/men/49.jpg  DE 20        Harvard</code></pre>
+<pre class="r"><code># Alternatively, you can extend a data frame by adding a new variable directly using the $ operator, like this:
+df$school &lt;- c(&quot;BU&quot;, &quot;BU&quot;, &quot;Harvard&quot;, &quot;Harvard&quot;, &quot;BU&quot;, &quot;Boston College&quot;, &quot;MIT&quot;,
+    &quot;BU&quot;, &quot;BU&quot;, &quot;UMASS Boston&quot;, &quot;Harvard&quot;, &quot;BU&quot;, &quot;Boston College&quot;, &quot;BU&quot;, &quot;Harvard&quot;,
+    &quot;MIT&quot;, &quot;Harvard&quot;, &quot;BU&quot;, &quot;UMASS Boston&quot;, &quot;Harvard&quot;)</code></pre>
+</div>
+<div id="filtering" class="section level3">
+<h3>Filtering</h3>
+<pre class="r"><code># Logical vectors may also be used to subset data frames. Here, we subset the data frame for only those rows where the variable school is “BU”. In this case, R evaluates the expression `df$school == “BU” and returns a logical vector equal in length to the number of rows in df. It then subsets df based on that vector, returning only rows that evaluate to TRUE.
+new_df &lt;- df[df$school == &quot;BU&quot;, ]
+new_df</code></pre>
+<pre><code>##    gender name.title name.first  name.last         location.street
+## 1    male         mr        ted     wright           2020 royal ln
+## 2    male         mr    quentin    schmitt         2433 rue dubois
+## 5  female         ms     susana     blanco 2208 avenida de america
+## 8  female       miss     kaylee     gordon         5475 camden ave
+## 9    male         mr     baraek limoncuocu          2664 baedat cd
+## 12   male         mr   valtteri   waisanen          9850 hemeentie
+## 14 female       miss   kimberly      brown         8654 manor road
+## 18 female         ms       ella       neva          4620 visiokatu
+##      location.city location.state location.postcode
+## 1    coffs harbour       tasmania              4126
+## 2  vitry-sur-seine indre-et-loire             99856
+## 5         mastoles    extremadura             29445
+## 8            flint         oregon             84509
+## 9            siirt          tokat             86146
+## 12          halsua  south karelia             58124
+## 14          bangor        borders          HI92 8RY
+## 18          kerava finland proper             26385
+##                              email    login.username login.password
+## 1           ted.wright@example.com organicleopard402          rolex
+## 2      quentin.schmitt@example.com      bluegoose191         norton
+## 5        susana.blanco@example.com    silverkoala701          aloha
+## 8        kaylee.gordon@example.com beautifulgoose794       atlantis
+## 9  baraek.limoncuoculu@example.com whitebutterfly599         tobias
+## 12   valtteri.waisanen@example.com        redswan919       nocturne
+## 14      kimberly.brown@example.com  crazyelephant996       nebraska
+## 18           ella.neva@example.com  orangegorilla786       f00tball
+##               dob date.registered          phone           cell
+## 1    11/8/73 1:33    5/5/07 20:26   01-0349-5128   0449-989-455
+## 2    5/24/51 3:16    4/11/11 7:05 05-72-65-32-21 06-83-24-92-41
+## 5   12/18/55 3:21   10/3/02 17:55    917-199-202    612-612-929
+## 8   3/24/48 12:22     5/5/13 8:14 (817)-962-1275 (831)-325-1142
+## 9    5/8/92 22:01    9/12/04 0:56 (023)-879-4331 (837)-014-1113
+## 12 12/24/80 10:40   9/22/03 20:47     02-227-661  042-153-83-79
+## 14    1/9/86 8:54    12/3/11 0:41   017684 80873   0799-553-944
+## 18  7/18/91 14:30    3/17/14 7:13     02-351-279  043-436-42-30
+##                                       picture.large nat id school
+## 1    https://randomuser.me/api/portraits/men/48.jpg  AU  1     BU
+## 2    https://randomuser.me/api/portraits/men/53.jpg  FR  2     BU
+## 5  https://randomuser.me/api/portraits/women/18.jpg  ES  5     BU
+## 8  https://randomuser.me/api/portraits/women/65.jpg  US  8     BU
+## 9    https://randomuser.me/api/portraits/men/94.jpg  TR  9     BU
+## 12   https://randomuser.me/api/portraits/men/80.jpg  FI 12     BU
+## 14 https://randomuser.me/api/portraits/women/49.jpg  GB 14     BU
+## 18 https://randomuser.me/api/portraits/women/68.jpg  FI 18     BU</code></pre>
+<pre class="r"><code># We can also choose to only return particular columns when we subset.
+new_df &lt;- df[df$school == &quot;BU&quot;, c(&quot;name.last&quot;, &quot;name.first&quot;, &quot;school&quot;)]
+new_df</code></pre>
+<pre><code>##     name.last name.first school
+## 1      wright        ted     BU
+## 2     schmitt    quentin     BU
+## 5      blanco     susana     BU
+## 8      gordon     kaylee     BU
+## 9  limoncuocu     baraek     BU
+## 12   waisanen   valtteri     BU
+## 14      brown   kimberly     BU
+## 18       neva       ella     BU</code></pre>
+</div>
+<div id="challenge-5" class="section level3">
+<h3>CHALLENGE 5</h3>
+<pre class="r"><code>numbers &lt;- c(3, 0, 1,
+          23, 1, 2,
+          33, 1, 1,
+          42, 0, 1,
+          41, 0, 2)
+
+# Create a 5×3 matrix, filled by row
+m3 &lt;- matrix(numbers, nrow = 5, ncol = 3, byrow = TRUE)
+
+# View the matrix
+print(m3)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    3    0    1
+## [2,]   23    1    2
+## [3,]   33    1    1
+## [4,]   42    0    1
+## [5,]   41    0    2</code></pre>
+<pre class="r"><code># Convert matrix &#39;m3&#39; to a data frame
+df_m3 &lt;- as.data.frame(m3)
+
+# View the resulting data frame
+print(df_m3)</code></pre>
+<pre><code>##   V1 V2 V3
+## 1  3  0  1
+## 2 23  1  2
+## 3 33  1  1
+## 4 42  0  1
+## 5 41  0  2</code></pre>
+<pre class="r"><code># Coerce the 2nd column to logical
+df_m3[, 2] &lt;- as.logical(df_m3[, 2])
+
+
+# Coerce the 3rd column factors
+df_m3[, 3] &lt;- as.factor(df_m3[, 3])
+
+# show data type in df_m3
+str(df_m3)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
+##  $ V1: num  3 23 33 42 41
+##  $ V2: logi  FALSE TRUE TRUE FALSE FALSE
+##  $ V3: Factor w/ 2 levels &quot;1&quot;,&quot;2&quot;: 1 2 1 1 2</code></pre>
 </div>
 
 
