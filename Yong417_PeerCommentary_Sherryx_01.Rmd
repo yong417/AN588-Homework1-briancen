@@ -12,7 +12,11 @@ output: html_document
 
 -   **I put all code comments in #comment**
 
+    -   Only made 1 comment for challenge 1
+
 -   **Organization suggestions are already made**
+
+    -   Only made 1 comment for overall organization
 
 -   **After each change I committed a change to your repo (hopefully you can see the comments)**
 
