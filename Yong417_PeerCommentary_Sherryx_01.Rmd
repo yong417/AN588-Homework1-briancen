@@ -16,6 +16,10 @@ output: html_document
 
 -   **After each change I committed a change to your repo (hopefully you can see the comments)**
 
+Organization suggestion: I put all the challenges together and the notes at the very end in **[red]{style="color: red;"}**
+
+## Module 4 Challenges
+
 ### CHALLENGE 1
 
 First, create a vector of 1, word character strings comprising the first line of the novel Ulysses, by James Joyce: “Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.”
@@ -72,6 +76,69 @@ a[1:5, 1:5, 3, 3]
 
 ```
 
+### CHALLENGE 4
+
+```{r}
+# store the lowest family in vectors
+Platyrrhini <- c("Cebidae", "Atelidae", "Pitheciidae")
+Catarrhini  <- c("Cercopithecidae", "Hylobatidae", "Hominidae")
+Tarsioidea  <- c("Tarsiidae")
+Lorisoidea  <- c("Lorisidae", "Galagidae")
+Lemuroidea  <- c("Cheirogaleidae", "Lepilemuridae", "Indriidae", "Lemuridae", "Daubentoniidae")
+
+#group family into new vector that represent the higher family 
+Anthropoidea <- list(Platyrrhini, Catarrhini)
+names(Anthropoidea) <- c("Platyrrhini", "Catarrhini")
+
+Haplorhini <- list(Anthropoidea, Tarsioidea)
+names(Haplorhini) <- c("Anthropoidea", "Tarsioidea")
+
+Strepsirhini <- list(Lorisoidea, Lemuroidea)
+names(Strepsirhini) <- c("Lemuroidea", "Lorisoidea")
+
+# combine all into "primates"
+Primates <- list(Haplorhini, Strepsirhini)
+names(Primates) <- c("Haplorhini", "Strepsirhini")
+
+Primates
+
+```
+
+### CHALLENGE 5
+
+```{r}
+numbers <- c(3, 0, 1,
+          23, 1, 2,
+          33, 1, 1,
+          42, 0, 1,
+          41, 0, 2)
+
+# Create a 5×3 matrix, filled by row
+m3 <- matrix(numbers, nrow = 5, ncol = 3, byrow = TRUE)
+
+# View the matrix
+print(m3)
+
+# Convert matrix 'm3' to a data frame
+df_m3 <- as.data.frame(m3)
+
+# View the resulting data frame
+print(df_m3)
+
+# Coerce the 2nd column to logical
+df_m3[, 2] <- as.logical(df_m3[, 2])
+
+
+# Coerce the 3rd column factors
+df_m3[, 3] <- as.factor(df_m3[, 3])
+
+# show data type in df_m3
+str(df_m3)
+
+```
+
+## Notes 
+
 ### Overwriting
 
 ```{r}
@@ -105,34 +172,6 @@ names(l)
 
 l$string  # this is calling the element named 'string' in list 'l'
 l$matrix[3, 5]  # this is calling the entry in row 3, column 5 of the element named 'matrix' in list 'l'
-
-```
-
-### CHALLENGE 4
-
-```{r}
-# store the lowest family in vectors
-Platyrrhini <- c("Cebidae", "Atelidae", "Pitheciidae")
-Catarrhini  <- c("Cercopithecidae", "Hylobatidae", "Hominidae")
-Tarsioidea  <- c("Tarsiidae")
-Lorisoidea  <- c("Lorisidae", "Galagidae")
-Lemuroidea  <- c("Cheirogaleidae", "Lepilemuridae", "Indriidae", "Lemuridae", "Daubentoniidae")
-
-#group family into new vector that represent the higher family 
-Anthropoidea <- list(Platyrrhini, Catarrhini)
-names(Anthropoidea) <- c("Platyrrhini", "Catarrhini")
-
-Haplorhini <- list(Anthropoidea, Tarsioidea)
-names(Haplorhini) <- c("Anthropoidea", "Tarsioidea")
-
-Strepsirhini <- list(Lorisoidea, Lemuroidea)
-names(Strepsirhini) <- c("Lemuroidea", "Lorisoidea")
-
-# combine all into "primates"
-Primates <- list(Haplorhini, Strepsirhini)
-names(Primates) <- c("Haplorhini", "Strepsirhini")
-
-Primates
 
 ```
 
@@ -192,39 +231,5 @@ new_df
 # We can also choose to only return particular columns when we subset.
 new_df <- df[df$school == "BU", c("name.last", "name.first", "school")]
 new_df
-
-
-```
-
-### CHALLENGE 5
-
-```{r}
-numbers <- c(3, 0, 1,
-          23, 1, 2,
-          33, 1, 1,
-          42, 0, 1,
-          41, 0, 2)
-
-# Create a 5×3 matrix, filled by row
-m3 <- matrix(numbers, nrow = 5, ncol = 3, byrow = TRUE)
-
-# View the matrix
-print(m3)
-
-# Convert matrix 'm3' to a data frame
-df_m3 <- as.data.frame(m3)
-
-# View the resulting data frame
-print(df_m3)
-
-# Coerce the 2nd column to logical
-df_m3[, 2] <- as.logical(df_m3[, 2])
-
-
-# Coerce the 3rd column factors
-df_m3[, 3] <- as.factor(df_m3[, 3])
-
-# show data type in df_m3
-str(df_m3)
 
 ```
