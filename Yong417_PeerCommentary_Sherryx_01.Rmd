@@ -1,0 +1,230 @@
+---
+title: "AN588 Homework 1"
+subtitle: "Module 04: Working with Other Data Structures"
+author: "Yongliang Cen"
+date: "2025-01-31"
+output: html_document
+---
+
+**Sherry's comment instructions:**
+
+-   **I provided a summary of my suggestions in [red]{style="color: red;"}.**
+
+-   **I put all code comments in #comment**
+
+-   **Organization suggestions are already made**
+
+-   **After each change I committed a change to your repo (hopefully you can see the comments)**
+
+### CHALLENGE 1
+
+First, create a vector of 1, word character strings comprising the first line of the novel Ulysses, by James Joyce: “Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.”
+
+```{r}
+# Load the stringr package
+library(stringr)
+
+# Create the string
+my_line <- "Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed."
+
+# Split word
+split_word <- str_split(my_line, "\\s+",  simplify = TRUE)
+
+# extract every third element
+every_third_word <- split_word[seq(3, length(split_word), by = 3)]
+
+
+every_third_word
+
+```
+
+### CHALLENGE 2
+
+```{r}
+
+# store the matrix
+m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
+
+#Given the matrix, m, above, extract the 2nd, 3rd, and 6th columns and assign them to the variable x
+x <- m[, c(2, 3, 6)]
+
+# Given the matrix, m, above, extract the 6th to 8th row and assign them to the variable x
+x <- m[6:8, ]
+
+# Given the matrix, m, above, extract the elements from row 2, column 2 to row 6, column 9 and assign them to the variable x
+x <- m[2:6, 2:9]
+
+
+```
+
+### CHALLENGE 3
+
+Construct a 4-dimensional, 400 element array (5 x 5 x 4 x 4) named a consisting of the numbers 400 to 1 (i.e., a descending series)
+
+```{r}
+a <- array(400:1, dim = c(5, 5, 4, 4))
+
+a[1, 1, 1, 2]
+
+a[2, 3, 2, ]
+
+a[1:5, 1:5, 3, 3]
+
+```
+
+### Overwriting
+
+```{r}
+m[7, 1] <- 564
+m[, 8] <- 2
+m[2:5, 4:8] <- 1
+m[2:5, 4:8] <- c(20, 19, 18, 17)
+m[2:5, 4:8] <- matrix(data = c(20:1), nrow = 4, ncol = 5, byrow = TRUE)
+m[, 8] <- c("a", "b")
+
+```
+
+### Lists and Data Frames
+
+```{r}
+
+s <- c("this", "is", "a", "vector", "of", "strings")  # here we have a vector
+m <- matrix(data = 1:40, nrow = 5, ncol = 8)  # this is a matrix
+b <- FALSE  #and this is a logical statement
+l <- list(s, m, b)  # this puts them all together as a list
+l
+
+l[[2]]  #let's take another look at our matrix
+l[[2]][2, 6]  #this will show us the entry at row 2, column 6 of the matrix in the second position of the list
+l[1:2]  # here we're slicing our list so it just has the first and second elements
+l[c(1, 3)]  # and here we're only taking the first and third elements
+str(l)
+
+names(l) <- c("string", "matrix", "logical")
+names(l)
+
+l$string  # this is calling the element named 'string' in list 'l'
+l$matrix[3, 5]  # this is calling the entry in row 3, column 5 of the element named 'matrix' in list 'l'
+
+```
+
+### CHALLENGE 4
+
+```{r}
+# store the lowest family in vectors
+Platyrrhini <- c("Cebidae", "Atelidae", "Pitheciidae")
+Catarrhini  <- c("Cercopithecidae", "Hylobatidae", "Hominidae")
+Tarsioidea  <- c("Tarsiidae")
+Lorisoidea  <- c("Lorisidae", "Galagidae")
+Lemuroidea  <- c("Cheirogaleidae", "Lepilemuridae", "Indriidae", "Lemuridae", "Daubentoniidae")
+
+#group family into new vector that represent the higher family 
+Anthropoidea <- list(Platyrrhini, Catarrhini)
+names(Anthropoidea) <- c("Platyrrhini", "Catarrhini")
+
+Haplorhini <- list(Anthropoidea, Tarsioidea)
+names(Haplorhini) <- c("Anthropoidea", "Tarsioidea")
+
+Strepsirhini <- list(Lorisoidea, Lemuroidea)
+names(Strepsirhini) <- c("Lemuroidea", "Lorisoidea")
+
+# combine all into "primates"
+Primates <- list(Haplorhini, Strepsirhini)
+names(Primates) <- c("Haplorhini", "Strepsirhini")
+
+Primates
+
+```
+
+### Random People Data Frame
+
+```{r}
+# get directory for random_people.csv
+getwd()
+
+#read scv
+df <- read.csv("~/Documents/GitHub/AN588-Homework1-briancen/random-people.csv", sep = ",", header = TRUE, stringsAsFactors = FALSE)
+
+# only print select columns
+df[, c(1, 3, 4, 11, 12)]
+
+# check elements
+str(df)
+
+# returns a vector of data in column 3
+df[, 3]
+
+
+# returns a vector of data for column *name.last*
+str(df$name.last)
+
+
+# returns a data frame of data from column 3
+df[3]
+
+# returns a data frame of data for column *name.last*
+df["name.last"]
+
+# You can add rows (additional cases) or columns (additional variables) to a data frame using rbind() and cbind().
+df <- cbind(df, id = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+    17, 18, 19, 20))
+df <- cbind(df, school = c("BU", "BU", "Harvard", "Harvard", "BU", "Boston College",
+    "MIT", "BU", "BU", "UMASS Boston", "Harvard", "BU", "Boston College", "BU",
+    "Harvard", "MIT", "Harvard", "BU", "UMASS Boston", "Harvard"))
+df
+
+
+# Alternatively, you can extend a data frame by adding a new variable directly using the $ operator, like this:
+df$school <- c("BU", "BU", "Harvard", "Harvard", "BU", "Boston College", "MIT",
+    "BU", "BU", "UMASS Boston", "Harvard", "BU", "Boston College", "BU", "Harvard",
+    "MIT", "Harvard", "BU", "UMASS Boston", "Harvard")
+
+
+```
+
+### Filtering
+
+```{r}
+# Logical vectors may also be used to subset data frames. Here, we subset the data frame for only those rows where the variable school is “BU”. In this case, R evaluates the expression `df$school == “BU” and returns a logical vector equal in length to the number of rows in df. It then subsets df based on that vector, returning only rows that evaluate to TRUE.
+new_df <- df[df$school == "BU", ]
+new_df
+
+# We can also choose to only return particular columns when we subset.
+new_df <- df[df$school == "BU", c("name.last", "name.first", "school")]
+new_df
+
+
+```
+
+### CHALLENGE 5
+
+```{r}
+numbers <- c(3, 0, 1,
+          23, 1, 2,
+          33, 1, 1,
+          42, 0, 1,
+          41, 0, 2)
+
+# Create a 5×3 matrix, filled by row
+m3 <- matrix(numbers, nrow = 5, ncol = 3, byrow = TRUE)
+
+# View the matrix
+print(m3)
+
+# Convert matrix 'm3' to a data frame
+df_m3 <- as.data.frame(m3)
+
+# View the resulting data frame
+print(df_m3)
+
+# Coerce the 2nd column to logical
+df_m3[, 2] <- as.logical(df_m3[, 2])
+
+
+# Coerce the 3rd column factors
+df_m3[, 3] <- as.factor(df_m3[, 3])
+
+# show data type in df_m3
+str(df_m3)
+
+```
