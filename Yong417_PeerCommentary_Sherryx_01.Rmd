@@ -16,13 +16,15 @@ output: html_document
 
 -   **After each change I committed a change to your repo (hopefully you can see the comments)**
 
-Organization suggestion: I put all the challenges together and the notes at the very end in **[red]{style="color: red;"}**
+**Organization suggestion: I put all the challenges together and the notes at the very end in [red]{style="color: red;"}**
 
 ## Module 4 Challenges
 
 ### CHALLENGE 1
 
 First, create a vector of 1, word character strings comprising the first line of the novel Ulysses, by James Joyce: “Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.”
+
+**Added in a line of code for removing punctuation. Before #split word , and after #create the string [red]{style="color: red;"}**
 
 ```{r}
 # Load the stringr package
@@ -31,8 +33,11 @@ library(stringr)
 # Create the string
 my_line <- "Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed."
 
+# Remove punctuation
+my_line_clean <- gsub("[[:punct:]]", "", my_line)
+
 # Split word
-split_word <- str_split(my_line, "\\s+",  simplify = TRUE)
+split_word <- str_split(my_line_clean, "\\s+",  simplify = TRUE)
 
 # extract every third element
 every_third_word <- split_word[seq(3, length(split_word), by = 3)]
